@@ -1,0 +1,34 @@
+
+Теория:
+
+•	https://proselyte.net/tutorials/hibernate-tutorial/
+•	https://habr.com/post/271115/
+•	https://habr.com/post/29694/
+
+Видео:
+
+•	https://youtu.be/C-wEZjEOhWc
+•	https://youtu.be/YzOTZTt-PR0
+
+Практика:
+
+Необходимо реализовать консольное CRUD приложение, которое взаимодействует с БД и позволяет выполнять все CRUD операции над сущностями:
+
+Writer (id, firstName, lastName, List<Post> posts);
+Post (id, content, created, updated, List<Label> labels);
+Label (id, name);
+PostStatus (enum ACTIVE, UNDER_REVIEW, DELETED).
+
+Требования:
+
+•	Все CRUD операции для каждой из сущностей;
+•	Придерживаться подхода MVC;
+•	Для сборки проекта использовать Maven;
+•	Для взаимодействия с БД - Hibernate;
+•	Для конфигурирования Hibernate - аннотации;
+•	Инициализация БД должна быть реализована с помощью Flyway;
+•	Сервисный слой приложения должен быть покрыт юнит тестами (junit + mockito).
+
+Результатом выполнения проекта должен быть отдельный репозиторий на github, с описанием задачи, проекта и инструкцией по локальному запуску проекта.
+
+Технологии: Java, PostgreSQL, Hibernate, Flyway, Maven.

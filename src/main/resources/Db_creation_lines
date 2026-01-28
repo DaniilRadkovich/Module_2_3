@@ -1,0 +1,37 @@
+CREATE DATABASE library_db;
+
+CREATE TABLE `label` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `status` enum('ACTIVE','UNDER_REVIEW','DELETED') DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+CREATE TABLE `post` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `content` varchar(255) DEFAULT NULL,
+  `created` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `status` enum('ACTIVE','UNDER_REVIEW','DELETED') DEFAULT NULL,
+  `writer_id` bigint DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_post_writer` (`writer_id`),
+  CONSTRAINT `fk_post_writer` FOREIGN KEY (`writer_id`) REFERENCES `writer` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+CREATE TABLE `post_label` (
+  `post_id` bigint NOT NULL,
+  `label_id` bigint NOT NULL,
+  PRIMARY KEY (`post_id`,`label_id`),
+  KEY `fk_post_label_label` (`label_id`),
+  CONSTRAINT `fk_post_label_label` FOREIGN KEY (`label_id`) REFERENCES `label` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `fk_post_label_post` FOREIGN KEY (`post_id`) REFERENCES `post` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+CREATE TABLE `writer` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `first_name` varchar(255) DEFAULT NULL,
+  `last_name` varchar(255) DEFAULT NULL,
+  `status` enum('ACTIVE','UNDER_REVIEW','DELETED') DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
